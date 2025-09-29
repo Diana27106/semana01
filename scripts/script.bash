@@ -2,7 +2,7 @@
 
 #Variables
 elementos=("git" "jq" "node" "npm" "curl")
-arch=(".env.example" ".gitignore" "README.md")
+arch=(".env.example" ".gitignore" "README.md" "package.json")
 dir=("src" "scripts")
 USER=$(whoami)
 PROYECTO="semana01"
@@ -10,8 +10,10 @@ PROYECTO="semana01"
 #Verificar herramientas
 for herramienta in "${elementos[@]}"
 do 
-    if command -v "$herramienta" &> /dev/null; then
+    if command -v "$herramienta" &> /dev/null 2>&1; then
         echo "Herramienta '$herramienta' encontrada"
+        VERSION=$($herramienta --version)
+        echo $VERSION
     else
         echo "ERROR: La herramienta '$herramienta' no está instalada"
         exit 1
